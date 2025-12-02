@@ -11,7 +11,17 @@
 [![Platform](https://img.shields.io/badge/Platform-Android%20%7C%20iOS-lightgrey)](https://flutter.dev)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-[📱 Download APK](docs/apk/coachguru-latest.apk) • [📖 Documentation](docs/index.html) • [🐛 Report Bug](https://github.com/GuruGroup-de/coachguru-app/issues) • [💡 Request Feature](https://github.com/GuruGroup-de/coachguru-app/issues)
+<div align="center" style="margin: 20px 0;">
+
+<a href="docs/apk/coachguru-latest.apk" download style="display: inline-block; padding: 12px 30px; background: linear-gradient(135deg, #0b69ff 0%, #00c2ff 100%); color: white; text-decoration: none; border-radius: 25px; font-weight: 600; font-size: 16px; box-shadow: 0 4px 15px rgba(11, 105, 255, 0.3); transition: transform 0.2s, box-shadow 0.2s; margin: 5px;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(11, 105, 255, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(11, 105, 255, 0.3)';">📱 Download APK</a>
+
+<a href="https://gurugroup-de.github.io/coachguru-app" target="_blank" rel="noopener noreferrer" style="display: inline-block; padding: 12px 30px; background: linear-gradient(135deg, #4A90E2 0%, #0288D1 100%); color: white; text-decoration: none; border-radius: 25px; font-weight: 600; font-size: 16px; box-shadow: 0 4px 15px rgba(74, 144, 226, 0.3); transition: transform 0.2s, box-shadow 0.2s; margin: 5px;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(74, 144, 226, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(74, 144, 226, 0.3)';">🌐 Visit Website</a>
+
+<a href="https://www.instagram.com/coachguru1" target="_blank" rel="noopener noreferrer" style="display: inline-block; padding: 12px 30px; background: linear-gradient(135deg, #E4405F 0%, #F77737 50%, #FCAF45 100%); color: white; text-decoration: none; border-radius: 25px; font-weight: 600; font-size: 16px; box-shadow: 0 4px 15px rgba(228, 64, 95, 0.3); transition: transform 0.2s, box-shadow 0.2s; margin: 5px;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(228, 64, 95, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(228, 64, 95, 0.3)';">📷 Instagram</a>
+
+</div>
+
+[📖 Documentation](docs/index.html) • [🐛 Report Bug](https://github.com/GuruGroup-de/coachguru-app/issues) • [💡 Request Feature](https://github.com/GuruGroup-de/coachguru-app/issues)
 
 </div>
 
