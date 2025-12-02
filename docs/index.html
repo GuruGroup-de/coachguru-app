@@ -300,6 +300,13 @@
             box-shadow: 0 15px 40px rgba(74, 144, 226, 0.25);
         }
 
+        .screenshot-img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+        }
+
         .screenshot-placeholder {
             width: 100%;
             height: 400px;
@@ -537,16 +544,20 @@
             <p class="section-subtitle">Beautiful, intuitive interface designed for coaches</p>
             <div class="screenshots-grid">
                 <div class="screenshot-card">
-                    <div class="screenshot-placeholder">Player Management</div>
+                    <img src="images/home.png" alt="CoachGuru Home Screen" class="screenshot-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="screenshot-placeholder" style="display: none;">Home Screen</div>
                 </div>
                 <div class="screenshot-card">
-                    <div class="screenshot-placeholder">Match Statistics</div>
+                    <img src="images/players.png" alt="Player Management" class="screenshot-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="screenshot-placeholder" style="display: none;">Player Management</div>
                 </div>
                 <div class="screenshot-card">
-                    <div class="screenshot-placeholder">Tactic Board</div>
+                    <img src="images/scouting.png" alt="Scouting Reports" class="screenshot-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="screenshot-placeholder" style="display: none;">Scouting Reports</div>
                 </div>
                 <div class="screenshot-card">
-                    <div class="screenshot-placeholder">Scouting Reports</div>
+                    <img src="images/matches.png" alt="Match History" class="screenshot-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="screenshot-placeholder" style="display: none;">Match History</div>
                 </div>
             </div>
         </div>
