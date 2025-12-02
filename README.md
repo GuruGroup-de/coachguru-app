@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![CoachGuru Logo](docs/images/home.png)
+![CoachGuru Logo](docs/branding/coachguru-logo.png)
 
 ### Next-gen football coaching in your pocket
 
