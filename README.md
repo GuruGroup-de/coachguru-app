@@ -6,10 +6,17 @@
 
 ### Next-gen football coaching in your pocket
 
+<div align="center">
+
 [![Flutter](https://img.shields.io/badge/Flutter-3.24+-02569B?logo=flutter&logoColor=white)](https://flutter.dev)
-[![Dart](https://img.shields.io/badge/Dart-3.0+-0175C2?logo=dart&logoColor=white)](https://dart.dev)
+[![Build](https://img.shields.io/badge/Build-Passing-brightgreen)](https://github.com/GuruGroup-de/coachguru-app)
 [![Platform](https://img.shields.io/badge/Platform-Android%20%7C%20iOS-lightgrey)](https://flutter.dev)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![GitHub Stars](https://img.shields.io/github/stars/GuruGroup-de/coachguru-app?style=social)](https://github.com/GuruGroup-de/coachguru-app/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/GuruGroup-de/coachguru-app?style=social)](https://github.com/GuruGroup-de/coachguru-app/network/members)
+[![Last Commit](https://img.shields.io/github/last-commit/GuruGroup-de/coachguru-app)](https://github.com/GuruGroup-de/coachguru-app/commits/main)
+
+</div>
 
 <div align="center" style="margin: 20px 0;">
 
