@@ -69,13 +69,36 @@ Whether you're managing a youth team or a professional squad, CoachGuru provides
 
 <div align="center">
 
-| Home Screen | Player Management | Scouting Reports | Match History |
-|:-----------:|:-----------------:|:----------------:|:-------------:|
-| ![Home](docs/screenshots/home.png) | ![Players](docs/screenshots/players.png) | ![Scouting](docs/screenshots/scouting.png) | ![Matches](docs/screenshots/matches.png) |
-
-| History | Tactics |
-|:-------:|:-------:|
-| ![History](docs/screenshots/history.png) | ![Tactics](docs/screenshots/tactics.png) |
+<table>
+<tr>
+<td align="center" width="33%">
+<img src="docs/screenshots/home.png" alt="Home Screen" width="100%" style="max-width: 300px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+<br><strong>Home Screen</strong>
+</td>
+<td align="center" width="33%">
+<img src="docs/screenshots/players.png" alt="Player Management" width="100%" style="max-width: 300px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+<br><strong>Player Management</strong>
+</td>
+<td align="center" width="33%">
+<img src="docs/screenshots/scouting.png" alt="Scouting Reports" width="100%" style="max-width: 300px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+<br><strong>Scouting Reports</strong>
+</td>
+</tr>
+<tr>
+<td align="center" width="33%">
+<img src="docs/screenshots/matches.png" alt="Match History" width="100%" style="max-width: 300px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+<br><strong>Match History</strong>
+</td>
+<td align="center" width="33%">
+<img src="docs/screenshots/history.png" alt="History" width="100%" style="max-width: 300px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+<br><strong>History</strong>
+</td>
+<td align="center" width="33%">
+<img src="docs/screenshots/tactics.png" alt="Tactics Board" width="100%" style="max-width: 300px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+<br><strong>Tactics Board</strong>
+</td>
+</tr>
+</table>
 
 </div>
 
