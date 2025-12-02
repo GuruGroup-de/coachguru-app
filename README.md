@@ -301,11 +301,22 @@ coachguru-app/
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! We love your input and want to make contributing as easy as possible.
+
+Please read our [Contributing Guidelines](CONTRIBUTING.md) for details on:
+- How to clone and run the project
+- Branch naming conventions
+- Commit message style (Conventional Commits)
+- How to report issues
+- How to submit pull requests
+
+We also have a [Code of Conduct](CODE_OF_CONDUCT.md) that we expect all contributors to follow.
+
+### Quick Start
 
 1. Fork the repository
 2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+3. Commit your changes (`git commit -m 'feat(scope): Add some AmazingFeature'`)
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
