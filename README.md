@@ -71,7 +71,11 @@ Whether you're managing a youth team or a professional squad, CoachGuru provides
 
 | Home Screen | Player Management | Scouting Reports | Match History |
 |:-----------:|:-----------------:|:----------------:|:-------------:|
-| ![Home](docs/images/home.png) | ![Players](docs/images/players.png) | ![Scouting](docs/images/scouting.png) | ![Matches](docs/images/matches.png) |
+| ![Home](docs/screenshots/home.png) | ![Players](docs/screenshots/players.png) | ![Scouting](docs/screenshots/scouting.png) | ![Matches](docs/screenshots/matches.png) |
+
+| History | Tactics |
+|:-------:|:-------:|
+| ![History](docs/screenshots/history.png) | ![Tactics](docs/screenshots/tactics.png) |
 
 </div>
 
