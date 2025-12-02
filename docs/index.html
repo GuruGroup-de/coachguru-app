@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="CoachGuru - Next-Gen Football Coaching App for professional team management">
-    <title>CoachGuru – Next-Gen Football Coaching App</title>
+    <meta name="description" content="CoachGuru - Next-gen football coaching app for managing players, matches, scouting, tactics, and video analysis">
+    <title>CoachGuru – Next-gen Football Coaching App</title>
     <style>
         * {
             margin: 0;
@@ -12,13 +12,27 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --main-blue: #4A90E2;
+            --dark-blue: #0288D1;
+            --light-blue: #E3F2FD;
+            --white: #FFFFFF;
+            --text-dark: #1A1A1A;
+            --text-light: #666666;
+            --shadow: rgba(74, 144, 226, 0.2);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
-            color: #1A1A1A;
-            background: linear-gradient(135deg, #E3F2FD 0%, #FFFFFF 50%, #E3F2FD 100%);
-            min-height: 100vh;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, var(--light-blue) 0%, var(--white) 50%, var(--light-blue) 100%);
             background-attachment: fixed;
+            overflow-x: hidden;
         }
 
         .container {
@@ -27,360 +41,609 @@
             padding: 0 20px;
         }
 
-        /* Header Section */
+        /* Header & Navigation */
         header {
-            background: linear-gradient(135deg, #4A90E2 0%, #0288D1 100%);
-            color: white;
-            padding: 80px 20px;
-            text-align: center;
-            box-shadow: 0 4px 20px rgba(74, 144, 226, 0.3);
-        }
-
-        h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-            letter-spacing: -1px;
-        }
-
-        .subtitle {
-            font-size: 1.3rem;
-            opacity: 0.95;
-            font-weight: 300;
-        }
-
-        /* Main Content */
-        main {
-            padding: 60px 0;
-        }
-
-        section {
-            background: white;
-            margin: 40px auto;
-            padding: 50px;
-            border-radius: 20px;
-            box-shadow: 0 8px 30px rgba(74, 144, 226, 0.15);
-            max-width: 1000px;
-        }
-
-        h2 {
-            color: #4A90E2;
-            font-size: 2.2rem;
-            margin-bottom: 25px;
-            text-align: center;
-            font-weight: 600;
-        }
-
-        h3 {
-            color: #4A90E2;
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-
-        p {
-            color: #666666;
-            font-size: 1.1rem;
-            line-height: 1.8;
-            margin-bottom: 20px;
-        }
-
-        /* About Section */
-        .about-content {
-            text-align: center;
-        }
-
-        .about-content p {
-            max-width: 800px;
-            margin: 0 auto 20px;
-        }
-
-        /* Features Section */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 40px;
-        }
-
-        .feature-card {
-            background: linear-gradient(135deg, #E3F2FD 0%, #FFFFFF 100%);
-            padding: 30px;
-            border-radius: 15px;
-            text-align: center;
-            border: 2px solid #E3F2FD;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(74, 144, 226, 0.1);
+            z-index: 1000;
+            padding: 15px 0;
             transition: all 0.3s ease;
         }
 
-        .feature-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 30px rgba(74, 144, 226, 0.25);
-            border-color: #4A90E2;
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 15px;
-            display: block;
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--main-blue);
+            text-decoration: none;
+            letter-spacing: -0.5px;
         }
 
-        .feature-card h3 {
-            color: #4A90E2;
-            font-size: 1.4rem;
-            margin-bottom: 12px;
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
         }
 
-        .feature-card p {
-            color: #666666;
-            font-size: 1rem;
-            margin: 0;
+        .nav-links a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
         }
 
-        /* Download Section */
-        .download-section {
+        .nav-links a:hover {
+            color: var(--main-blue);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            background: linear-gradient(135deg, #4A90E2 0%, #0288D1 100%);
-            color: white;
+            padding: 120px 20px 80px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .download-section h2 {
-            color: white;
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--main-blue) 0%, var(--dark-blue) 100%);
+            opacity: 0.05;
+            z-index: -1;
         }
 
-        .download-section p {
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 30px;
+        .hero-content {
+            animation: fadeInUp 1s ease-out;
+            max-width: 900px;
+        }
+
+        .hero-logo {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--main-blue);
+            margin-bottom: 20px;
+            letter-spacing: -2px;
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 25px;
+            line-height: 1.2;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .hero-subtext {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            margin-bottom: 40px;
+            line-height: 1.8;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.6s both;
         }
 
         .btn {
             display: inline-block;
             padding: 18px 40px;
-            background: white;
-            color: #4A90E2;
-            text-decoration: none;
             border-radius: 50px;
-            font-weight: 600;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-            border: 2px solid white;
-        }
-
-        .btn:hover {
-            background: transparent;
-            color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Contact Section */
-        .contact-section {
-            text-align: center;
-        }
-
-        .contact-info {
-            background: #F5F5F5;
-            padding: 30px;
-            border-radius: 15px;
-            margin-top: 20px;
-        }
-
-        .contact-info p {
-            margin: 10px 0;
-            font-size: 1.1rem;
-        }
-
-        .email-link {
-            color: #4A90E2;
             text-decoration: none;
             font-weight: 600;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px var(--shadow);
+            border: none;
+            cursor: pointer;
         }
 
-        .email-link:hover {
-            text-decoration: underline;
+        .btn-primary {
+            background: var(--main-blue);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--dark-blue);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px var(--shadow);
+        }
+
+        .btn-secondary {
+            background: var(--white);
+            color: var(--main-blue);
+            border: 2px solid var(--main-blue);
+        }
+
+        .btn-secondary:hover {
+            background: var(--light-blue);
+            transform: translateY(-3px);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            background: var(--white);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 60px;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(74, 144, 226, 0.1);
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+            animation: fadeInUp 0.8s ease-out both;
+        }
+
+        .feature-card:nth-child(1) { animation-delay: 0.1s; }
+        .feature-card:nth-child(2) { animation-delay: 0.2s; }
+        .feature-card:nth-child(3) { animation-delay: 0.3s; }
+        .feature-card:nth-child(4) { animation-delay: 0.4s; }
+        .feature-card:nth-child(5) { animation-delay: 0.5s; }
+        .feature-card:nth-child(6) { animation-delay: 0.6s; }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(74, 144, 226, 0.2);
+            border-color: var(--main-blue);
+        }
+
+        .feature-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .coming-soon {
+            display: inline-block;
+            background: var(--light-blue);
+            color: var(--main-blue);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        /* Screenshots Section */
+        .screenshots {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--light-blue) 0%, var(--white) 100%);
+        }
+
+        .screenshots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 50px;
+        }
+
+        .screenshot-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(74, 144, 226, 0.15);
+            transition: all 0.4s ease;
+            animation: fadeInUp 0.8s ease-out both;
+        }
+
+        .screenshot-card:nth-child(1) { animation-delay: 0.1s; }
+        .screenshot-card:nth-child(2) { animation-delay: 0.2s; }
+        .screenshot-card:nth-child(3) { animation-delay: 0.3s; }
+        .screenshot-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .screenshot-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(74, 144, 226, 0.25);
+        }
+
+        .screenshot-placeholder {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, var(--main-blue) 0%, var(--dark-blue) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.2rem;
+            font-weight: 600;
         }
 
         /* Footer */
         footer {
-            background: #1A1A1A;
-            color: white;
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 60px 0 30px;
             text-align: center;
-            padding: 30px 20px;
-            margin-top: 60px;
         }
 
-        footer p {
-            color: rgba(255, 255, 255, 0.8);
-            margin: 0;
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--main-blue);
+            margin-bottom: 10px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .social-link {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .social-link:hover {
+            color: var(--main-blue);
+        }
+
+        .footer-text {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
+            margin-top: 20px;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Mobile Responsive */
         @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
+            .nav-links {
+                display: none;
             }
 
-            .subtitle {
+            .hero-logo {
+                font-size: 3rem;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-subtext {
                 font-size: 1.1rem;
             }
 
-            header {
-                padding: 60px 20px;
-            }
-
-            section {
-                padding: 30px 20px;
-                margin: 30px 20px;
-            }
-
-            h2 {
-                font-size: 1.8rem;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .feature-card {
-                padding: 25px 20px;
+            .cta-buttons {
+                flex-direction: column;
             }
 
             .btn {
-                padding: 15px 30px;
-                font-size: 1.1rem;
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .features-grid,
+            .screenshots-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card,
+            .screenshot-card {
+                animation-delay: 0s !important;
             }
         }
 
         @media (max-width: 480px) {
-            h1 {
-                font-size: 2rem;
+            .hero {
+                padding: 100px 20px 60px;
             }
 
-            header {
-                padding: 40px 15px;
+            .hero-logo {
+                font-size: 2.5rem;
             }
 
-            section {
-                padding: 25px 15px;
-                margin: 20px 10px;
+            .hero-title {
+                font-size: 1.75rem;
             }
 
-            h2 {
-                font-size: 1.5rem;
+            .hero-subtext {
+                font-size: 1rem;
             }
 
-            p {
+            .features,
+            .screenshots {
+                padding: 60px 0;
+            }
+
+            .section-title {
+                font-size: 1.75rem;
+            }
+
+            .feature-card {
+                padding: 30px 20px;
+            }
+
+            .screenshot-placeholder {
+                height: 300px;
                 font-size: 1rem;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Header -->
     <header>
-        <div class="container">
-            <h1>CoachGuru</h1>
-            <p class="subtitle">Next-Gen Football Coaching App</p>
-        </div>
+        <nav class="container">
+            <a href="#" class="logo">⚽ CoachGuru</a>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#screenshots">Screenshots</a></li>
+                <li><a href="#download">Download</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <main>
-        <div class="container">
-            <!-- About Section -->
-            <section class="about-section">
-                <h2>About CoachGuru</h2>
-                <div class="about-content">
-                    <p>
-                        CoachGuru is a comprehensive mobile application designed for professional football coaches 
-                        to manage their teams, track player performance, analyze tactics, and record match statistics. 
-                        Built with Flutter for cross-platform compatibility, CoachGuru helps you stay organized 
-                        and make data-driven coaching decisions.
-                    </p>
-                    <p>
-                        Whether you're managing a youth team or a professional squad, CoachGuru provides all the 
-                        tools you need to elevate your coaching game. From player profiles to tactical boards, 
-                        from match statistics to video analysis – everything you need is in one powerful app.
-                    </p>
-                </div>
-            </section>
-
-            <!-- Features Section -->
-            <section class="features-section">
-                <h2>Features</h2>
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <span class="feature-icon">👥</span>
-                        <h3>Players</h3>
-                        <p>Manage your squad with detailed player profiles, statistics, and performance tracking</p>
-                    </div>
-                    <div class="feature-card">
-                        <span class="feature-icon">⚽</span>
-                        <h3>Matches</h3>
-                        <p>Record match results, track goals, assists, and maintain a complete match history</p>
-                    </div>
-                    <div class="feature-card">
-                        <span class="feature-icon">🔍</span>
-                        <h3>Scouting</h3>
-                        <p>Create detailed scouting reports with strengths, weaknesses, and potential analysis</p>
-                    </div>
-                    <div class="feature-card">
-                        <span class="feature-icon">📊</span>
-                        <h3>History</h3>
-                        <p>Keep a comprehensive record of all matches, results, and team performance over time</p>
-                    </div>
-                    <div class="feature-card">
-                        <span class="feature-icon">🎯</span>
-                        <h3>Tactics</h3>
-                        <p>Design formations, plan strategies, and visualize team tactics on an interactive board</p>
-                    </div>
-                    <div class="feature-card">
-                        <span class="feature-icon">📹</span>
-                        <h3>Video Analysis</h3>
-                        <p>Import videos, mark key moments, and analyze gameplay with timestamp annotations</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Download Section -->
-            <section class="download-section">
-                <h2>Download CoachGuru</h2>
-                <p>Get the latest version of CoachGuru for Android</p>
-                <a href="#" class="btn" id="downloadBtn">Download APK</a>
-            </section>
-
-            <!-- Contact Section -->
-            <section class="contact-section">
-                <h2>Contact</h2>
-                <div class="contact-info">
-                    <p>For inquiries, support, or feedback:</p>
-                    <p>
-                        <a href="mailto:contact@coachguru.app" class="email-link">contact@coachguru.app</a>
-                    </p>
-                    <p style="margin-top: 20px;">
-                        Visit our <a href="https://github.com/GuruGroup-de/coachguru-app" target="_blank" rel="noopener noreferrer" class="email-link">GitHub Repository</a> for more information
-                    </p>
-                </div>
-            </section>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-logo">⚽ CoachGuru</div>
+            <h1 class="hero-title">Next-gen football coaching in your pocket</h1>
+            <p class="hero-subtext">
+                Manage players, track matches, create scouting reports, design tactics, and analyze videos. 
+                Everything you need to coach like a pro, all in one powerful app.
+            </p>
+            <div class="cta-buttons">
+                <a href="#download" class="btn btn-primary" id="downloadBtn">Download APK</a>
+                <a href="https://github.com/GuruGroup-de/coachguru-app" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">View GitHub Repo</a>
+            </div>
         </div>
-    </main>
+    </section>
 
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">Powerful Features</h2>
+            <p class="section-subtitle">Everything you need to manage your team professionally</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">👥</span>
+                    <h3>Player Management</h3>
+                    <p>Track player profiles, statistics, attendance, and performance metrics all in one place</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">⚽</span>
+                    <h3>Match History</h3>
+                    <p>Record match results, goals, assists, and maintain a complete history of all games</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">📝</span>
+                    <h3>Training Notes</h3>
+                    <p>Keep detailed training session notes, track attendance, and monitor player progress</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🔍</span>
+                    <h3>Scouting Reports</h3>
+                    <p>Create comprehensive scouting reports with strengths, weaknesses, and potential analysis</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🎯</span>
+                    <h3>Tactic Board</h3>
+                    <p>Design formations, plan strategies, and visualize team tactics on an interactive board</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">📹</span>
+                    <h3>Video Analysis</h3>
+                    <p>Import videos, mark key moments, and analyze gameplay with timestamp annotations</p>
+                    <span class="coming-soon">Coming Soon</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshots Section -->
+    <section class="screenshots" id="screenshots">
+        <div class="container">
+            <h2 class="section-title">See CoachGuru in Action</h2>
+            <p class="section-subtitle">Beautiful, intuitive interface designed for coaches</p>
+            <div class="screenshots-grid">
+                <div class="screenshot-card">
+                    <div class="screenshot-placeholder">Player Management</div>
+                </div>
+                <div class="screenshot-card">
+                    <div class="screenshot-placeholder">Match Statistics</div>
+                </div>
+                <div class="screenshot-card">
+                    <div class="screenshot-placeholder">Tactic Board</div>
+                </div>
+                <div class="screenshot-card">
+                    <div class="screenshot-placeholder">Scouting Reports</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section class="features" id="download" style="padding: 80px 0;">
+        <div class="container" style="text-align: center;">
+            <h2 class="section-title">Ready to Get Started?</h2>
+            <p class="section-subtitle">Download CoachGuru and take your coaching to the next level</p>
+            <div class="cta-buttons" style="margin-top: 40px;">
+                <a href="#" class="btn btn-primary" id="downloadBtnBottom">Download APK</a>
+                <a href="https://github.com/GuruGroup-de/coachguru-app" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">View on GitHub</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; 2024 CoachGuru. All rights reserved.</p>
+            <div class="footer-content">
+                <div class="footer-logo">⚽ CoachGuru</div>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/coachguru1" target="_blank" rel="noopener noreferrer" class="social-link">
+                        📷 @coachguru1
+                    </a>
+                    <a href="https://github.com/GuruGroup-de/coachguru-app" target="_blank" rel="noopener noreferrer" class="social-link">
+                        🔗 GitHub
+                    </a>
+                </div>
+                <p class="footer-text">&copy; 2024 CoachGuru. All rights reserved.</p>
+            </div>
         </div>
     </footer>
 
     <script>
-        // Handle download button click
-        document.getElementById('downloadBtn').addEventListener('click', function(e) {
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && href !== '#download') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Download button handlers
+        function handleDownload(e) {
             e.preventDefault();
             // Placeholder: Update this URL to point to your actual APK download location
-            // For example: GitHub Releases or a direct download link
-            alert('APK download link will be available soon. Please check GitHub Releases for the latest version.');
+            alert('APK download will be available soon. Please check GitHub Releases for the latest version.');
             // Uncomment and update when ready:
             // window.open('YOUR_APK_DOWNLOAD_URL', '_blank');
+        }
+
+        document.getElementById('downloadBtn').addEventListener('click', handleDownload);
+        document.getElementById('downloadBtnBottom').addEventListener('click', handleDownload);
+
+        // Header scroll effect
+        let lastScroll = 0;
+        const header = document.querySelector('header');
+        
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            if (currentScroll > 100) {
+                header.style.boxShadow = '0 2px 30px rgba(74, 144, 226, 0.2)';
+            } else {
+                header.style.boxShadow = '0 2px 20px rgba(74, 144, 226, 0.1)';
+            }
+            lastScroll = currentScroll;
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all feature cards and screenshots
+        document.querySelectorAll('.feature-card, .screenshot-card').forEach(el => {
+            observer.observe(el);
         });
     </script>
 </body>
