@@ -34,6 +34,18 @@
 
 ---
 
+## <span style="background: linear-gradient(135deg, #0b69ff 0%, #00c2ff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">📱 Live App Preview</span>
+
+<div align="center" style="margin: 40px 0;">
+
+<img src="docs/screenshots/app-preview.gif" alt="CoachGuru App Preview" style="max-width: 100%; width: 400px; height: auto; border-radius: 20px; box-shadow: 0 8px 30px rgba(11, 105, 255, 0.3); border: 3px solid rgba(11, 105, 255, 0.2);">
+
+<p style="margin-top: 15px; color: #666; font-size: 0.95rem;">Watch CoachGuru in action</p>
+
+</div>
+
+---
+
 ## 🎨 Color Palette
 
 <div align="center">
