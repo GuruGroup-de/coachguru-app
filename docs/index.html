@@ -490,7 +490,7 @@
                 Everything you need to coach like a pro, all in one powerful app.
             </p>
             <div class="cta-buttons">
-                <a href="#download" class="btn btn-primary" id="downloadBtn">Download APK</a>
+                <a href="apk/coachguru-latest.apk" class="btn btn-primary" id="downloadBtn" download>Download APK</a>
                 <a href="https://github.com/GuruGroup-de/coachguru-app" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">View GitHub Repo</a>
             </div>
         </div>
@@ -569,7 +569,7 @@
             <h2 class="section-title">Ready to Get Started?</h2>
             <p class="section-subtitle">Download CoachGuru and take your coaching to the next level</p>
             <div class="cta-buttons" style="margin-top: 40px;">
-                <a href="#" class="btn btn-primary" id="downloadBtnBottom">Download APK</a>
+                <a href="apk/coachguru-latest.apk" class="btn btn-primary" id="downloadBtnBottom" download>Download APK</a>
                 <a href="https://github.com/GuruGroup-de/coachguru-app" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">View on GitHub</a>
             </div>
         </div>
@@ -611,17 +611,7 @@
             });
         });
 
-        // Download button handlers
-        function handleDownload(e) {
-            e.preventDefault();
-            // Placeholder: Update this URL to point to your actual APK download location
-            alert('APK download will be available soon. Please check GitHub Releases for the latest version.');
-            // Uncomment and update when ready:
-            // window.open('YOUR_APK_DOWNLOAD_URL', '_blank');
-        }
-
-        document.getElementById('downloadBtn').addEventListener('click', handleDownload);
-        document.getElementById('downloadBtnBottom').addEventListener('click', handleDownload);
+        // Download buttons now use direct links to apk/coachguru-latest.apk
 
         // Header scroll effect
         let lastScroll = 0;
