@@ -1,16 +1,305 @@
-# coachguru_3_0
+# ⚽ CoachGuru – Football Coaching App
 
-A new Flutter project.
+<div align="center">
 
-## Getting Started
+![CoachGuru Logo](docs/images/home.png)
 
-This project is a starting point for a Flutter application.
+### Next-gen football coaching in your pocket
 
-A few resources to get you started if this is your first Flutter project:
+[![Flutter](https://img.shields.io/badge/Flutter-3.24+-02569B?logo=flutter&logoColor=white)](https://flutter.dev)
+[![Dart](https://img.shields.io/badge/Dart-3.0+-0175C2?logo=dart&logoColor=white)](https://dart.dev)
+[![Platform](https://img.shields.io/badge/Platform-Android%20%7C%20iOS-lightgrey)](https://flutter.dev)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+[📱 Download APK](docs/apk/coachguru-latest.apk) • [📖 Documentation](docs/index.html) • [🐛 Report Bug](https://github.com/GuruGroup-de/coachguru-app/issues) • [💡 Request Feature](https://github.com/GuruGroup-de/coachguru-app/issues)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+</div>
+
+---
+
+## 📋 Overview
+
+**CoachGuru** is a comprehensive mobile application designed for professional football coaches to manage their teams, track player performance, analyze tactics, and record match statistics. Built with Flutter for cross-platform compatibility, CoachGuru helps you stay organized and make data-driven coaching decisions.
+
+Whether you're managing a youth team or a professional squad, CoachGuru provides all the tools you need to elevate your coaching game. From player profiles to tactical boards, from match statistics to video analysis – everything you need is in one powerful app.
+
+---
+
+## ✨ Features
+
+### 👥 Player Management
+- **Player Profiles**: Track detailed player information including name, position, birth year, strong foot, and photo
+- **Statistics Tracking**: Monitor goals, assists, match history, and performance metrics
+- **Attendance Tracking**: Record training attendance with session types (Training, Match, Fitness)
+- **Performance Analytics**: View attendance percentages and performance trends
+
+### ⚽ Match History
+- **Match Records**: Maintain a complete history of all matches with results, dates, and types
+- **Match Statistics**: Track shots, passes, possession, goals, assists, and more
+- **Timeline Events**: Record key moments like goals, assists, substitutions, and cards
+- **Detailed Match Reports**: View comprehensive match details and statistics
+
+### 📝 Training Management
+- **Training Squad**: Manage training sessions with date and session type selection
+- **Attendance Tracking**: Mark player attendance (Yes/No) for each session
+- **Statistics Dashboard**: View attendance percentages with visual charts
+- **Session Types**: Organize by Training, Match, or Fitness sessions
+
+### 🔍 Scouting Reports
+- **Player Scouting**: Create detailed scouting reports with strengths, weaknesses, and potential
+- **Scouting Templates**: Use predefined templates for quick report generation
+- **Player-Specific Notes**: Link scouting notes to individual players
+- **Report Management**: View, edit, and organize all scouting reports
+
+### 🎯 Tactic Board
+- **Interactive Tactics**: Design formations and visualize team tactics on an interactive board
+- **Formation Presets**: Quick access to common formations (4-4-2, 4-3-3, 3-5-2, 2-3-1)
+- **Team Management**: Switch between teams and save custom formations
+- **Drag & Drop**: Intuitive player positioning with free movement
+
+### 📹 Video Analysis *(Coming Soon)*
+- **Video Import**: Import videos from device gallery
+- **Moment Marking**: Mark key moments with timestamps and annotations
+- **Thumbnail Generation**: Auto-generate thumbnails for video moments
+- **Playback Controls**: Full video player with timeline navigation
+
+---
+
+## 📸 Screenshots
+
+<div align="center">
+
+| Home Screen | Player Management | Scouting Reports | Match History |
+|:-----------:|:-----------------:|:----------------:|:-------------:|
+| ![Home](docs/images/home.png) | ![Players](docs/images/players.png) | ![Scouting](docs/images/scouting.png) | ![Matches](docs/images/matches.png) |
+
+</div>
+
+---
+
+## 🚀 Installation
+
+### Prerequisites
+
+- [Flutter SDK](https://flutter.dev/docs/get-started/install) (3.24 or higher)
+- [Dart SDK](https://dart.dev/get-dart) (3.0 or higher)
+- Android Studio / Xcode (for platform-specific builds)
+- Git
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/GuruGroup-de/coachguru-app.git
+cd coachguru-app
+```
+
+### Install Dependencies
+
+```bash
+flutter pub get
+```
+
+### Run the App
+
+```bash
+# Run on connected device/emulator
+flutter run
+
+# Run on specific platform
+flutter run -d android
+flutter run -d ios
+flutter run -d web
+```
+
+### Build APK (Android)
+
+```bash
+# Debug APK
+flutter build apk --debug
+
+# Release APK
+flutter build apk --release
+
+# The APK will be located at:
+# build/app/outputs/flutter-apk/app-release.apk
+```
+
+### Build IPA (iOS)
+
+```bash
+# Release IPA (requires Xcode and Apple Developer account)
+flutter build ipa --release
+```
+
+---
+
+## 📥 Download
+
+### Direct APK Download
+
+[![Download APK](https://img.shields.io/badge/Download-APK-blue?style=for-the-badge&logo=android)](docs/apk/coachguru-latest.apk)
+
+Click the button above or visit the [releases page](https://github.com/GuruGroup-de/coachguru-app/releases) for the latest version.
+
+---
+
+## 🛠 Tech Stack
+
+- **Framework**: [Flutter](https://flutter.dev) 3.24+
+- **Language**: [Dart](https://dart.dev) 3.0+
+- **State Management**: Provider
+- **Local Storage**: SharedPreferences
+- **Image Picker**: image_picker
+- **Video Player**: video_player, chewie
+- **Charts**: fl_chart
+- **Screenshots**: screenshot
+- **Sharing**: share_plus
+
+### Key Dependencies
+
+```yaml
+provider: ^6.1.1
+shared_preferences: ^2.2.2
+image_picker: ^1.0.7
+path_provider: ^2.1.2
+uuid: ^4.3.3
+fl_chart: ^0.68.0
+video_player: ^2.10.1
+chewie: ^1.7.4
+video_thumbnail: ^0.5.6
+screenshot: ^3.0.0
+share_plus: ^7.2.0
+```
+
+---
+
+## 📁 Project Structure
+
+```
+coachguru-app/
+├── lib/
+│   ├── main.dart                 # App entry point
+│   ├── theme/
+│   │   └── theme.dart            # App theme configuration
+│   ├── player/
+│   │   ├── player_model.dart
+│   │   ├── player_provider.dart
+│   │   ├── player_profile_screen.dart
+│   │   ├── add_player_screen.dart
+│   │   └── edit_player_screen.dart
+│   ├── history/
+│   │   ├── models/
+│   │   ├── providers/
+│   │   ├── screens/
+│   │   └── widgets/
+│   ├── scouting/
+│   │   ├── screens/
+│   │   └── scouting_template_screen.dart
+│   ├── tactic/
+│   │   ├── models/
+│   │   ├── providers/
+│   │   ├── screens/
+│   │   └── widgets/
+│   ├── training/
+│   │   ├── providers/
+│   │   ├── screens/
+│   │   └── widgets/
+│   ├── stats/
+│   │   ├── models/
+│   │   ├── providers/
+│   │   ├── screens/
+│   │   └── widgets/
+│   ├── video/
+│   │   ├── models/
+│   │   ├── providers/
+│   │   ├── screens/
+│   │   └── utils/
+│   ├── models/
+│   ├── providers/
+│   ├── utils/
+│   └── widgets/
+├── android/                      # Android platform files
+├── ios/                          # iOS platform files
+├── docs/                         # Documentation and website
+│   ├── index.html               # Landing page
+│   ├── images/                  # Screenshots
+│   └── apk/                     # APK downloads
+├── assets/                       # App assets (images, icons)
+├── test/                         # Unit and widget tests
+└── pubspec.yaml                  # Dependencies and metadata
+```
+
+---
+
+## 🗺 Roadmap
+
+### ✅ Completed Features
+- [x] Player Management System
+- [x] Match History & Statistics
+- [x] Training Attendance Tracking
+- [x] Scouting Reports
+- [x] Tactic Board with Formations
+- [x] Modern UI Theme System
+- [x] Local Data Persistence
+
+### 🚧 In Progress
+- [ ] Video Analysis Module (UI complete, functionality in progress)
+- [ ] Firebase Integration
+- [ ] Cloud Sync
+- [ ] Export/Import Data
+
+### 📋 Planned Features
+- [ ] **Advanced Analytics**: Detailed performance charts and insights
+- [ ] **Team Collaboration**: Share data with assistant coaches
+- [ ] **Match Live Tracking**: Real-time match statistics during games
+- [ ] **Custom Formations**: Save and share custom tactical formations
+- [ ] **Player Comparison**: Compare multiple players side-by-side
+- [ ] **Season Overview**: Annual statistics and trends
+- [ ] **Multi-language Support**: Support for multiple languages
+- [ ] **Dark Mode**: Complete dark theme support
+- [ ] **Widgets**: Home screen widgets for quick access
+- [ ] **Notifications**: Reminders for matches and training sessions
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+---
+
+## 📞 Support & Contact
+
+- **Instagram**: [@coachguru1](https://www.instagram.com/coachguru1)
+- **GitHub Issues**: [Report a bug or request a feature](https://github.com/GuruGroup-de/coachguru-app/issues)
+- **Website**: [View landing page](https://GuruGroup-de.github.io/coachguru-app/)
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 🙏 Acknowledgments
+
+- Built with [Flutter](https://flutter.dev)
+- Icons and UI inspiration from Material Design
+- Special thanks to all contributors and testers
+
+---
+
+<div align="center">
+
+**Made with ⚽ by CoachGuru Team**
+
+[⬆ Back to Top](#-coachguru--football-coaching-app)
+
+</div>
