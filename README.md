@@ -1,10 +1,10 @@
-# ⚽ CoachGuru – Football Coaching App
+# <span style="background: linear-gradient(135deg, #0b69ff 0%, #00c2ff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">⚽ CoachGuru</span> – Football Coaching App
 
 <div align="center">
 
 ![CoachGuru Logo](docs/branding/coachguru-logo.png)
 
-### Next-gen football coaching in your pocket
+### <span style="background: linear-gradient(135deg, #0b69ff 0%, #00c2ff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Next-gen football coaching in your pocket</span>
 
 <div align="center">
 
@@ -34,7 +34,51 @@
 
 ---
 
-## 📋 Overview
+## 🎨 Color Palette
+
+<div align="center">
+
+### CoachGuru Brand Colors
+
+<table>
+<tr>
+<td align="center">
+<div style="width: 120px; height: 120px; background: #0b69ff; border-radius: 15px; box-shadow: 0 4px 15px rgba(11, 105, 255, 0.3); margin: 10px;"></div>
+<br><strong>#0b69ff</strong><br>Primary Blue
+</td>
+<td align="center">
+<div style="width: 120px; height: 120px; background: #00c2ff; border-radius: 15px; box-shadow: 0 4px 15px rgba(0, 194, 255, 0.3); margin: 10px;"></div>
+<br><strong>#00c2ff</strong><br>Secondary Blue
+</td>
+<td align="center">
+<div style="width: 120px; height: 120px; background: #050816; border-radius: 15px; box-shadow: 0 4px 15px rgba(5, 8, 22, 0.3); margin: 10px;"></div>
+<br><strong>#050816</strong><br>Dark
+</td>
+<td align="center">
+<div style="width: 120px; height: 120px; background: #1a2a6c; border-radius: 15px; box-shadow: 0 4px 15px rgba(26, 42, 108, 0.3); margin: 10px;"></div>
+<br><strong>#1a2a6c</strong><br>Dark Blue
+</td>
+</tr>
+</table>
+
+### Gradient Examples
+
+<div style="width: 100%; height: 60px; background: linear-gradient(135deg, #0b69ff 0%, #00c2ff 100%); border-radius: 10px; margin: 10px 0; box-shadow: 0 4px 15px rgba(11, 105, 255, 0.3);"></div>
+<p style="margin: 5px 0;"><strong>Primary Gradient:</strong> #0b69ff → #00c2ff</p>
+
+<div style="width: 100%; height: 60px; background: linear-gradient(135deg, #050816 0%, #1a2a6c 100%); border-radius: 10px; margin: 10px 0; box-shadow: 0 4px 15px rgba(5, 8, 22, 0.3);"></div>
+<p style="margin: 5px 0;"><strong>Dark Gradient:</strong> #050816 → #1a2a6c</p>
+
+<div style="width: 100%; height: 60px; background: linear-gradient(135deg, #1a2a6c 0%, #0b69ff 50%, #00c2ff 100%); border-radius: 10px; margin: 10px 0; box-shadow: 0 4px 15px rgba(11, 105, 255, 0.3);"></div>
+<p style="margin: 5px 0;"><strong>Blue Gradient:</strong> #1a2a6c → #0b69ff → #00c2ff</p>
+
+For detailed usage guidelines, see [Theme Documentation](docs/theme/theme.md)
+
+</div>
+
+---
+
+## <span style="background: linear-gradient(135deg, #0b69ff 0%, #00c2ff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">📋 Overview</span>
 
 **CoachGuru** is a comprehensive mobile application designed for professional football coaches to manage their teams, track player performance, analyze tactics, and record match statistics. Built with Flutter for cross-platform compatibility, CoachGuru helps you stay organized and make data-driven coaching decisions.
 
@@ -42,7 +86,7 @@ Whether you're managing a youth team or a professional squad, CoachGuru provides
 
 ---
 
-## ✨ Features
+## <span style="background: linear-gradient(135deg, #0b69ff 0%, #00c2ff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">✨ Features</span>
 
 ### 👥 Player Management
 - **Player Profiles**: Track detailed player information including name, position, birth year, strong foot, and photo
@@ -82,7 +126,7 @@ Whether you're managing a youth team or a professional squad, CoachGuru provides
 
 ---
 
-## 📸 Screenshots
+## <span style="background: linear-gradient(135deg, #0b69ff 0%, #00c2ff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">📸 Screenshots</span>
 
 <div align="center">
 
@@ -121,7 +165,7 @@ Whether you're managing a youth team or a professional squad, CoachGuru provides
 
 ---
 
-## 🚀 Installation
+## <span style="background: linear-gradient(135deg, #0b69ff 0%, #00c2ff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">🚀 Installation</span>
 
 ### Prerequisites
 
@@ -177,7 +221,7 @@ flutter build ipa --release
 
 ---
 
-## 📥 Download
+## <span style="background: linear-gradient(135deg, #0b69ff 0%, #00c2ff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">📥 Download</span>
 
 ### Direct APK Download
 
@@ -187,7 +231,7 @@ Click the button above or visit the [releases page](https://github.com/GuruGroup
 
 ---
 
-## 🛠 Tech Stack
+## <span style="background: linear-gradient(135deg, #0b69ff 0%, #00c2ff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">🛠 Tech Stack</span>
 
 - **Framework**: [Flutter](https://flutter.dev) 3.24+
 - **Language**: [Dart](https://dart.dev) 3.0+
@@ -217,7 +261,7 @@ share_plus: ^7.2.0
 
 ---
 
-## 📁 Project Structure
+## <span style="background: linear-gradient(135deg, #0b69ff 0%, #00c2ff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">📁 Project Structure</span>
 
 ```
 coachguru-app/
@@ -275,7 +319,7 @@ coachguru-app/
 
 ---
 
-## 🗺 Roadmap
+## <span style="background: linear-gradient(135deg, #0b69ff 0%, #00c2ff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">🗺 Roadmap</span>
 
 ### ✅ Completed Features
 - [x] Player Management System
@@ -306,7 +350,7 @@ coachguru-app/
 
 ---
 
-## 🤝 Contributing
+## <span style="background: linear-gradient(135deg, #0b69ff 0%, #00c2ff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">🤝 Contributing</span>
 
 Contributions are welcome! We love your input and want to make contributing as easy as possible.
 
@@ -329,7 +373,7 @@ We also have a [Code of Conduct](CODE_OF_CONDUCT.md) that we expect all contribu
 
 ---
 
-## 📞 Support & Contact
+## <span style="background: linear-gradient(135deg, #0b69ff 0%, #00c2ff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">📞 Support & Contact</span>
 
 - **Instagram**: [@coachguru1](https://www.instagram.com/coachguru1)
 - **GitHub Issues**: [Report a bug or request a feature](https://github.com/GuruGroup-de/coachguru-app/issues)
@@ -337,7 +381,7 @@ We also have a [Code of Conduct](CODE_OF_CONDUCT.md) that we expect all contribu
 
 ---
 
-## 📄 License
+## <span style="background: linear-gradient(135deg, #0b69ff 0%, #00c2ff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">📄 License</span>
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 

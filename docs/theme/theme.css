@@ -1,0 +1,185 @@
+/**
+ * CoachGuru Theme CSS
+ * 
+ * Official color palette and styling for CoachGuru branding
+ * Use these colors consistently across all CoachGuru materials
+ */
+
+:root {
+  /* Primary Brand Colors */
+  --coachguru-blue-primary: #0b69ff;
+  --coachguru-blue-secondary: #00c2ff;
+  
+  /* Dark Colors */
+  --coachguru-dark: #050816;
+  --coachguru-dark-blue: #1a2a6c;
+  
+  /* Gradient Combinations */
+  --coachguru-gradient-primary: linear-gradient(135deg, #0b69ff 0%, #00c2ff 100%);
+  --coachguru-gradient-dark: linear-gradient(135deg, #050816 0%, #1a2a6c 100%);
+  --coachguru-gradient-blue: linear-gradient(135deg, #1a2a6c 0%, #0b69ff 50%, #00c2ff 100%);
+}
+
+/* Primary Blue (#0b69ff) */
+.coachguru-blue-primary {
+  color: #0b69ff;
+  background-color: #0b69ff;
+}
+
+.bg-coachguru-blue-primary {
+  background-color: #0b69ff;
+}
+
+.text-coachguru-blue-primary {
+  color: #0b69ff;
+}
+
+.border-coachguru-blue-primary {
+  border-color: #0b69ff;
+}
+
+/* Secondary Blue (#00c2ff) */
+.coachguru-blue-secondary {
+  color: #00c2ff;
+  background-color: #00c2ff;
+}
+
+.bg-coachguru-blue-secondary {
+  background-color: #00c2ff;
+}
+
+.text-coachguru-blue-secondary {
+  color: #00c2ff;
+}
+
+.border-coachguru-blue-secondary {
+  border-color: #00c2ff;
+}
+
+/* Dark (#050816) */
+.coachguru-dark {
+  color: #050816;
+  background-color: #050816;
+}
+
+.bg-coachguru-dark {
+  background-color: #050816;
+}
+
+.text-coachguru-dark {
+  color: #050816;
+}
+
+.border-coachguru-dark {
+  border-color: #050816;
+}
+
+/* Dark Blue (#1a2a6c) */
+.coachguru-dark-blue {
+  color: #1a2a6c;
+  background-color: #1a2a6c;
+}
+
+.bg-coachguru-dark-blue {
+  background-color: #1a2a6c;
+}
+
+.text-coachguru-dark-blue {
+  color: #1a2a6c;
+}
+
+.border-coachguru-dark-blue {
+  border-color: #1a2a6c;
+}
+
+/* Gradient Backgrounds */
+.bg-gradient-primary {
+  background: var(--coachguru-gradient-primary);
+}
+
+.bg-gradient-dark {
+  background: var(--coachguru-gradient-dark);
+}
+
+.bg-gradient-blue {
+  background: var(--coachguru-gradient-blue);
+}
+
+/* Gradient Text */
+.text-gradient-primary {
+  background: var(--coachguru-gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-blue {
+  background: var(--coachguru-gradient-blue);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Button Styles */
+.btn-coachguru-primary {
+  background: var(--coachguru-gradient-primary);
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 15px rgba(11, 105, 255, 0.3);
+}
+
+.btn-coachguru-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(11, 105, 255, 0.4);
+}
+
+.btn-coachguru-dark {
+  background: var(--coachguru-gradient-dark);
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 15px rgba(5, 8, 22, 0.3);
+}
+
+.btn-coachguru-dark:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(5, 8, 22, 0.4);
+}
+
+/* Card Styles */
+.card-coachguru {
+  background: white;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 8px 30px rgba(11, 105, 255, 0.1);
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.card-coachguru:hover {
+  border-color: #0b69ff;
+  box-shadow: 0 12px 40px rgba(11, 105, 255, 0.2);
+  transform: translateY(-5px);
+}
+
+/* Link Styles */
+.link-coachguru {
+  color: #0b69ff;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.link-coachguru:hover {
+  color: #00c2ff;
+  text-decoration: underline;
+}
+
