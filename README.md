@@ -75,13 +75,13 @@
 
 ### Gradient Examples
 
-<div style="width: 100%; height: 60px; background: linear-gradient(135deg, #0b69ff 0%, #00c2ff 100%); border-radius: 10px; margin: 10px 0; box-shadow: 0 4px 15px rgba(11, 105, 255, 0.3);"></div>
+<div style="width: 100%; max-width: 600px; height: 60px; background: linear-gradient(135deg, #0b69ff 0%, #00c2ff 100%); border-radius: 10px; margin: 10px auto; box-shadow: 0 4px 15px rgba(11, 105, 255, 0.3);"></div>
 <p style="margin: 5px 0;"><strong>Primary Gradient:</strong> #0b69ff → #00c2ff</p>
 
-<div style="width: 100%; height: 60px; background: linear-gradient(135deg, #050816 0%, #1a2a6c 100%); border-radius: 10px; margin: 10px 0; box-shadow: 0 4px 15px rgba(5, 8, 22, 0.3);"></div>
+<div style="width: 100%; max-width: 600px; height: 60px; background: linear-gradient(135deg, #050816 0%, #1a2a6c 100%); border-radius: 10px; margin: 10px auto; box-shadow: 0 4px 15px rgba(5, 8, 22, 0.3);"></div>
 <p style="margin: 5px 0;"><strong>Dark Gradient:</strong> #050816 → #1a2a6c</p>
 
-<div style="width: 100%; height: 60px; background: linear-gradient(135deg, #1a2a6c 0%, #0b69ff 50%, #00c2ff 100%); border-radius: 10px; margin: 10px 0; box-shadow: 0 4px 15px rgba(11, 105, 255, 0.3);"></div>
+<div style="width: 100%; max-width: 600px; height: 60px; background: linear-gradient(135deg, #1a2a6c 0%, #0b69ff 50%, #00c2ff 100%); border-radius: 10px; margin: 10px auto; box-shadow: 0 4px 15px rgba(11, 105, 255, 0.3);"></div>
 <p style="margin: 5px 0;"><strong>Blue Gradient:</strong> #1a2a6c → #0b69ff → #00c2ff</p>
 
 For detailed usage guidelines, see [Theme Documentation](docs/theme/theme.md)
@@ -142,7 +142,7 @@ Whether you're managing a youth team or a professional squad, CoachGuru provides
 
 <div align="center">
 
-<table>
+<table style="width: 100%; max-width: 1000px; margin: 0 auto;">
 <tr>
 <td align="center" width="33%">
 <img src="docs/screenshots/home.png" alt="Home Screen" width="100%" style="max-width: 300px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
@@ -237,7 +237,11 @@ flutter build ipa --release
 
 ### Direct APK Download
 
+<div align="center">
+
 [![Download APK](https://img.shields.io/badge/Download-APK-blue?style=for-the-badge&logo=android)](docs/apk/coachguru-latest.apk)
+
+</div>
 
 Click the button above or visit the [releases page](https://github.com/GuruGroup-de/coachguru-app/releases) for the latest version.
 
@@ -322,7 +326,9 @@ coachguru-app/
 ├── ios/                          # iOS platform files
 ├── docs/                         # Documentation and website
 │   ├── index.html               # Landing page
-│   ├── images/                  # Screenshots
+│   ├── screenshots/             # App screenshots
+│   ├── branding/                # Brand assets
+│   ├── theme/                   # Theme documentation
 │   └── apk/                     # APK downloads
 ├── assets/                       # App assets (images, icons)
 ├── test/                         # Unit and widget tests
@@ -389,7 +395,7 @@ We also have a [Code of Conduct](CODE_OF_CONDUCT.md) that we expect all contribu
 
 - **Instagram**: [@coachguru1](https://www.instagram.com/coachguru1)
 - **GitHub Issues**: [Report a bug or request a feature](https://github.com/GuruGroup-de/coachguru-app/issues)
-- **Website**: [View landing page](https://GuruGroup-de.github.io/coachguru-app/)
+- **Website**: [View landing page](https://gurugroup-de.github.io/coachguru-app/)
 
 ---
 
@@ -409,7 +415,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 <div align="center">
 
-**Made with ⚽ by CoachGuru Team**
+**Made with ⚽ by [CoachGuru Team](https://github.com/GuruGroup-de)**
 
 [⬆ Back to Top](#-coachguru--football-coaching-app)
 
