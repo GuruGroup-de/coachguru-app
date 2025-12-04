@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/logo/favicon.png?v=2">
+    <link rel="shortcut icon" href="assets/logo/favicon.ico?v=2">
+    <link rel="apple-touch-icon" href="assets/logo/coachguru_logo.png?v=2">
+    
     <!-- Primary Meta Tags -->
     <title>CoachGuru – Football Coaching App</title>
     <meta name="title" content="CoachGuru – Football Coaching App">
@@ -45,7 +50,7 @@
         "name": "CoachGuru",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://gurugroup-de.github.io/coachguru-app/branding/coachguru-logo.png"
+          "url": "https://gurugroup-de.github.io/coachguru-app/assets/logo/coachguru_logo.png"
         },
         "url": "https://github.com/GuruGroup-de/coachguru-app",
         "sameAs": [
@@ -111,14 +116,17 @@
         .container{max-width:1200px;margin:0 auto;padding:0 20px}
         header{position:fixed;top:0;left:0;right:0;background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);box-shadow:0 2px 20px var(--shadow-light);z-index:1000;padding:15px 0;transition:all 0.3s ease}
         nav{display:flex;justify-content:space-between;align-items:center}
-        .logo{font-size:1.8rem;font-weight:700;background:linear-gradient(135deg,var(--main-blue) 0%,var(--light-blue) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-decoration:none;letter-spacing:-0.5px}
+        .logo{display:flex;align-items:center;gap:10px;font-size:1.8rem;font-weight:700;background:linear-gradient(135deg,var(--main-blue) 0%,var(--light-blue) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-decoration:none;letter-spacing:-0.5px}
+        .logo img{width:40px;height:40px;object-fit:contain}
         .nav-links{display:flex;gap:30px;list-style:none}
         .nav-links a{color:var(--text-dark);text-decoration:none;font-weight:500;transition:color 0.3s ease}
         .nav-links a:hover{color:var(--main-blue)}
         .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 20px 80px;position:relative;overflow:hidden}
         .hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,var(--main-blue) 0%,var(--light-blue) 100%);opacity:0.05;z-index:-1}
         .hero-content{animation:fadeInUp 1s ease-out;max-width:900px;width:100%;margin:0 auto}
-        .hero-logo{font-size:4rem;font-weight:700;background:linear-gradient(135deg,var(--main-blue) 0%,var(--light-blue) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:20px;letter-spacing:-2px;animation:fadeIn 1.2s ease-out}
+        .hero-logo{display:flex;flex-direction:column;align-items:center;gap:20px;margin-bottom:20px;animation:fadeIn 1.2s ease-out}
+        .hero-logo img{width:120px;height:120px;object-fit:contain;border-radius:50%;box-shadow:0 8px 30px var(--shadow-light)}
+        .hero-logo-text{font-size:4rem;font-weight:700;background:linear-gradient(135deg,var(--main-blue) 0%,var(--light-blue) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-2px}
         .hero-title{font-size:3rem;font-weight:700;color:var(--text-dark);margin-bottom:25px;line-height:1.2;animation:fadeInUp 1s ease-out 0.2s both}
         .hero-subtext{font-size:1.3rem;color:var(--text-light);margin-bottom:40px;line-height:1.8;animation:fadeInUp 1s ease-out 0.4s both}
         .cta-buttons{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;animation:fadeInUp 1s ease-out 0.6s both;width:100%}
@@ -167,7 +175,10 @@
 <body>
     <header>
         <nav class="container">
-            <a href="#" class="logo">⚽ CoachGuru</a>
+            <a href="#" class="logo">
+                <img src="assets/logo/coachguru_logo.png?v=2" alt="CoachGuru Logo" />
+                <span>CoachGuru</span>
+            </a>
             <ul class="nav-links">
                 <li><a href="#features">Features</a></li>
                 <li><a href="#screenshots">Screenshots</a></li>
@@ -179,7 +190,10 @@
 
     <section class="hero">
         <div class="hero-content">
-            <div class="hero-logo">CoachGuru</div>
+            <div class="hero-logo">
+                <img src="assets/logo/coachguru_logo.png?v=2" alt="CoachGuru Logo" />
+                <div class="hero-logo-text">CoachGuru</div>
+            </div>
             <h1 class="hero-title">Next-gen football coaching in your pocket</h1>
             <p class="hero-subtext">Comprehensive mobile app for professional football coaches to manage teams, track player performance, analyze tactics, and record match statistics. Everything you need to elevate your coaching game.</p>
             <div class="cta-buttons">
