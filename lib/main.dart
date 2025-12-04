@@ -1,21 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
-import 'tactic_screen.dart';
 import 'theme/theme.dart';
 import 'providers/scouting_provider.dart';
-import 'tactic/providers/tactic_provider.dart';
-import 'tactic/screens/tactic_board_screen.dart';
-import 'history/providers/match_provider.dart';
-import 'history/screens/history_screen.dart';
-import 'history/models/match_model.dart';
-import 'history/screens/add_match_screen.dart';
-import 'stats/providers/match_stats_provider.dart';
+import 'history/history_list_screen.dart';
+import 'tournament/screens/tournament_screen.dart';
 import 'video/providers/video_analysis_provider.dart';
 import 'video/screens/video_import_screen.dart';
 import 'player/player_provider.dart';
@@ -305,7 +300,25 @@ class ProgramCalendarProvider extends ChangeNotifier {
 }
 
 void main() {
-  runApp(MyApp());
+  // Global error handler for Flutter framework errors
+  FlutterError.onError = (FlutterErrorDetails details) {
+    FlutterError.presentError(details);
+    print("Flutter Error: ${details.exception}");
+    if (details.stack != null) {
+      print("Stack trace: ${details.stack}");
+    }
+  };
+
+  // Global error handler for async errors outside Flutter framework
+  runZonedGuarded(
+    () {
+      runApp(MyApp());
+    },
+    (error, stack) {
+      print("Zoned Error: $error");
+      print("Stack trace: $stack");
+    },
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -317,9 +330,6 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => ProgramCalendarProvider()),
         ChangeNotifierProvider(create: (_) => ScoutingReportProvider()),
         ChangeNotifierProvider(create: (_) => ScoutingProvider()..loadNotes()),
-        ChangeNotifierProvider(create: (_) => TacticProvider()),
-        ChangeNotifierProvider(create: (_) => MatchProvider()..loadMatches()),
-        ChangeNotifierProvider(create: (_) => MatchStatsProvider()),
         ChangeNotifierProvider(create: (_) => VideoAnalysisProvider()),
         ChangeNotifierProvider(create: (_) => PlayerProvider()..loadPlayers()),
         ChangeNotifierProvider(
@@ -353,6 +363,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
+  bool _isNavigating = false;
 
   final List<Widget> _screens = [
     HomeScreen(),
@@ -360,16 +371,89 @@ class _MainScreenState extends State<MainScreen> {
     TrainingScreen(),
     ProgramScreen(),
     ScoutingScreen(),
-    HistoryScreen(),
-    TacticBoardScreen(),
+    HistoryListScreen(),
   ];
+
+  // Map of index to route names (none needed - all direct navigation)
+  final Map<int, String?> _indexToRoute = {
+    0: null, // Home - no route
+    1: null, // Team - no route
+    2: null, // Training - no route
+    3: null, // Program - no route
+    4: null, // Scouting - no route
+    5: null, // History - direct navigation
+  };
+
+  void _handleNavigation(int index) {
+    try {
+      // Prevent double-navigation
+      if (_isNavigating) {
+        print('Navigation already in progress, ignoring tap');
+        return;
+      }
+
+      // Check if tapping the same index
+      if (_selectedIndex == index) {
+        print('Same index tapped, ignoring');
+        return;
+      }
+
+      // Check if index is valid
+      if (index < 0 || index >= _screens.length) {
+        print('Invalid navigation index: $index');
+        return;
+      }
+
+      // Check if screen widget is valid
+      if (_screens[index] == null) {
+        print('Screen at index $index is null');
+        return;
+      }
+
+      _isNavigating = true;
+
+      // Direct navigation for all screens
+      final routeName = _indexToRoute[index];
+      if (routeName != null) {
+        if (!context.mounted) {
+          _isNavigating = false;
+          return;
+        }
+        // Update index first for UI consistency
+        if (mounted) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        }
+        NavHelper.safePushNamed(context, routeName).then((_) {
+          if (mounted) {
+            _isNavigating = false;
+          }
+        });
+        return;
+      }
+
+      // For other screens, use index-based navigation
+      if (mounted) {
+        setState(() {
+          _selectedIndex = index;
+          _isNavigating = false;
+        });
+      }
+    } catch (e) {
+      print('Navigation error: $e');
+      if (mounted) {
+        _isNavigating = false;
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Screenshot(
       controller: globalScreenshotController,
       child: Scaffold(
-        body: _screens[_selectedIndex],
+        body: _buildBody(),
         bottomNavigationBar: Container(
           decoration: BoxDecoration(
             color: CoachGuruTheme.white,
@@ -388,11 +472,7 @@ class _MainScreenState extends State<MainScreen> {
           child: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
             currentIndex: _selectedIndex,
-            onTap: (index) {
-              setState(() {
-                _selectedIndex = index;
-              });
-            },
+            onTap: _handleNavigation,
             backgroundColor: Colors.transparent,
             elevation: 0,
             selectedItemColor: CoachGuruTheme.mainBlue,
@@ -430,15 +510,32 @@ class _MainScreenState extends State<MainScreen> {
                 icon: Icon(Icons.history_rounded),
                 label: 'History',
               ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.sports_soccer_rounded),
-                label: 'Tactic',
-              ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  Widget _buildBody() {
+    // All screens use direct index-based navigation
+    final routeName = _indexToRoute[_selectedIndex];
+    if (routeName != null) {
+      // These screens are handled via routes, show home as fallback
+      return HomeScreen();
+    }
+
+    // Validate index before accessing screen
+    if (_selectedIndex < 0 || _selectedIndex >= _screens.length) {
+      return HomeScreen();
+    }
+
+    final screen = _screens[_selectedIndex];
+    if (screen == null) {
+      return HomeScreen();
+    }
+
+    return screen;
   }
 }
 
@@ -486,17 +583,21 @@ class HomeScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     // Circular Avatar
-                    Container(
-                      width: 80,
-                      height: 80,
-                      decoration: BoxDecoration(
-                        color: CoachGuruTheme.lightBlue,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Icon(
-                        Icons.person,
-                        size: 40,
-                        color: CoachGuruTheme.mainBlue,
+                    CircleAvatar(
+                      radius: 34,
+                      backgroundColor: Colors.white,
+                      child: ClipOval(
+                        child: Image.asset(
+                          'assets/images/coachguru_logo.png',
+                          fit: BoxFit.contain,
+                          width: 58,
+                          height: 58,
+                          errorBuilder: (context, error, stackTrace) {
+                            // Silently handle image loading errors
+                            debugPrint('Error loading logo: $error');
+                            return const SizedBox.shrink();
+                          },
+                        ),
                       ),
                     ),
                     const SizedBox(height: 16),
@@ -596,12 +697,25 @@ class HomeScreen extends StatelessWidget {
                 subtitle: 'Manage training squad',
                 onTap: () {
                   try {
-                    Navigator.push(
+                    NavHelper.safePushWidget(
                       context,
-                      MaterialPageRoute(
-                        builder: (_) => const TrainingSquadScreen(),
-                      ),
+                      const TrainingSquadScreen(),
                     );
+                  } catch (e) {
+                    print('Navigation error: $e');
+                  }
+                },
+              ),
+              const SizedBox(height: 12),
+              _buildActionCard(
+                context,
+                icon: Icons.emoji_events,
+                iconColor: CoachGuruTheme.accentGreen,
+                title: 'Tournament',
+                subtitle: 'Manage tournament',
+                onTap: () {
+                  try {
+                    NavHelper.safePushWidget(context, const TournamentScreen());
                   } catch (e) {
                     print('Navigation error: $e');
                   }
@@ -2037,202 +2151,6 @@ class _ProgramContentState extends State<ProgramContent> {
   }
 }
 
-class HistoryContent extends StatefulWidget {
-  @override
-  _HistoryContentState createState() => _HistoryContentState();
-}
-
-class _HistoryContentState extends State<HistoryContent> {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final provider = context.read<MatchProvider>();
-      provider.loadMatches();
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final provider = context.watch<MatchProvider>();
-    final matches = provider.matches;
-
-    return Scaffold(
-      backgroundColor: CoachGuruTheme.softGrey,
-      appBar: AppBar(
-        title: Text('Match History', style: theme.textTheme.headlineMedium),
-        backgroundColor: CoachGuruTheme.mainBlue,
-        foregroundColor: Colors.white,
-      ),
-      body: provider.isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : matches.isEmpty
-          ? Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.sports_soccer,
-                    size: 80,
-                    color: CoachGuruTheme.textLight,
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    'No matches yet',
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: CoachGuruTheme.textLight,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    'Tap the + button to add your first match',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: CoachGuruTheme.textLight,
-                    ),
-                  ),
-                ],
-              ),
-            )
-          : ListView.builder(
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              itemCount: matches.length,
-              itemBuilder: (context, index) {
-                if (index >= matches.length) {
-                  return const SizedBox.shrink();
-                }
-                final match = matches[index];
-                return Card(
-                  elevation: 4,
-                  margin: const EdgeInsets.symmetric(
-                    vertical: 10,
-                    horizontal: 16,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18),
-                  ),
-                  shadowColor: CoachGuruTheme.mainBlue.withOpacity(0.18),
-                  color: CoachGuruTheme.white,
-                  child: ListTile(
-                    contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 12,
-                    ),
-                    leading: Container(
-                      width: 46,
-                      height: 46,
-                      decoration: BoxDecoration(
-                        color: CoachGuruTheme.lightBlue,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: const Icon(
-                        Icons.history_rounded,
-                        color: CoachGuruTheme.mainBlue,
-                        size: 24,
-                      ),
-                    ),
-                    title: Text(
-                      match.opponent,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: CoachGuruTheme.textDark,
-                      ),
-                    ),
-                    subtitle: Padding(
-                      padding: const EdgeInsets.only(top: 4),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Date: ${match.date.toString().split(' ')[0]}',
-                            style: const TextStyle(
-                              fontSize: 14,
-                              color: CoachGuruTheme.textLight,
-                            ),
-                          ),
-                          Text(
-                            'Result: ${match.result}',
-                            style: const TextStyle(
-                              fontSize: 14,
-                              color: CoachGuruTheme.textLight,
-                            ),
-                          ),
-                          Text(
-                            'Type: ${match.type}',
-                            style: const TextStyle(
-                              fontSize: 14,
-                              color: CoachGuruTheme.textLight,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    trailing: IconButton(
-                      icon: const Icon(Icons.delete),
-                      color: CoachGuruTheme.errorRed,
-                      onPressed: () => _showDeleteConfirmation(match),
-                    ),
-                  ),
-                );
-              },
-            ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          try {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) => const AddMatchScreen()),
-            );
-          } catch (e) {
-            print('Navigation error: $e');
-          }
-        },
-        backgroundColor: CoachGuruTheme.mainBlue,
-        foregroundColor: Colors.white,
-        child: const Icon(Icons.add),
-      ),
-    );
-  }
-
-  void _showDeleteConfirmation(MatchModel match) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Delete Match'),
-        content: Text('Are you sure you want to delete ${match.opponent}?'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
-            style: TextButton.styleFrom(
-              foregroundColor: Theme.of(context).colorScheme.primary,
-            ),
-            child: const Text('Cancel'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              context.read<MatchProvider>().removeMatch(match.id);
-              Navigator.of(context, rootNavigator: true).pop();
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: CoachGuruTheme.errorRed,
-              foregroundColor: CoachGuruTheme.white,
-              minimumSize: const Size(double.infinity, 52),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30),
-              ),
-              elevation: 3,
-            ),
-            child: const Text('Delete'),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class StartMatchScreen extends StatefulWidget {
   @override
   _StartMatchScreenState createState() => _StartMatchScreenState();
@@ -3176,7 +3094,7 @@ class _ScoutingScreenState extends State<ScoutingScreen> {
   }
 
   void _showAddReportDialog() {
-    NavHelper.safePush(context, const AddScoutingReportScreen());
+    NavHelper.safePushWidget(context, const AddScoutingReportScreen());
   }
 
   void _showReportDetails(Map<String, dynamic> report) {

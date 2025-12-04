@@ -1,0 +1,161 @@
+name: Build and Release APK
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 'stable'
+          channel: 'stable'
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Increment build number
+        run: dart run tools/increment_version.dart
+
+      - name: Extract version from pubspec.yaml
+        id: version
+        run: |
+          VERSION=$(grep '^version:' pubspec.yaml | sed 's/version: //' | sed 's/+.*//')
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "tag=v$VERSION" >> $GITHUB_OUTPUT
+          echo "Extracted version: $VERSION"
+          echo "Tag will be: v$VERSION"
+
+      - name: Build Android Release APK
+        run: flutter build apk --release
+
+      - name: Check if release exists
+        id: check-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG="${{ steps.version.outputs.tag }}"
+          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github.v3+json" \
+            "https://api.github.com/repos/${{ github.repository }}/releases/tags/$TAG")
+          echo "exists=$RESPONSE" >> $GITHUB_OUTPUT
+          if [ "$RESPONSE" = "200" ]; then
+            echo "Release $TAG already exists"
+          else
+            echo "Release $TAG does not exist"
+          fi
+
+      - name: Delete existing release if it exists
+        if: steps.check-release.outputs.exists == '200'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG="${{ steps.version.outputs.tag }}"
+          RELEASE_RESPONSE=$(curl -s \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github.v3+json" \
+            "https://api.github.com/repos/${{ github.repository }}/releases/tags/$TAG")
+          
+          RELEASE_ID=$(echo "$RELEASE_RESPONSE" | jq -r '.id')
+          
+          if [ "$RELEASE_ID" != "null" ] && [ -n "$RELEASE_ID" ]; then
+            echo "Found existing release ID: $RELEASE_ID"
+            
+            # Delete existing assets first
+            ASSET_IDS=$(curl -s \
+              -H "Authorization: token $GITHUB_TOKEN" \
+              -H "Accept: application/vnd.github.v3+json" \
+              "https://api.github.com/repos/${{ github.repository }}/releases/$RELEASE_ID/assets" | jq -r '.[].id')
+            
+            for ASSET_ID in $ASSET_IDS; do
+              if [ "$ASSET_ID" != "null" ] && [ -n "$ASSET_ID" ]; then
+                echo "Deleting asset ID: $ASSET_ID"
+                curl -X DELETE \
+                  -H "Authorization: token $GITHUB_TOKEN" \
+                  -H "Accept: application/vnd.github.v3+json" \
+                  "https://api.github.com/repos/${{ github.repository }}/releases/assets/$ASSET_ID"
+              fi
+            done
+            
+            # Delete the release
+            echo "Deleting existing release ID: $RELEASE_ID"
+            curl -X DELETE \
+              -H "Authorization: token $GITHUB_TOKEN" \
+              -H "Accept: application/vnd.github.v3+json" \
+              "https://api.github.com/repos/${{ github.repository }}/releases/$RELEASE_ID"
+            
+            echo "Release and assets deleted successfully"
+          fi
+
+      - name: Create GitHub Release
+        id: create-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG="${{ steps.version.outputs.tag }}"
+          VERSION="${{ steps.version.outputs.version }}"
+          RELEASE_NAME="CoachGuru v$VERSION"
+          
+          RESPONSE=$(curl -s -w "\n%{http_code}" \
+            -X POST \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github.v3+json" \
+            -H "Content-Type: application/json" \
+            -d "{\"tag_name\":\"$TAG\",\"name\":\"$RELEASE_NAME\",\"body\":\"Automated release of CoachGuru v$VERSION\\n\\n## Changes\\n- Built from commit: ${{ github.sha }}\\n- Workflow run: ${{ github.run_id }}\",\"draft\":false,\"prerelease\":false}" \
+            "https://api.github.com/repos/${{ github.repository }}/releases")
+          
+          HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
+          BODY=$(echo "$RESPONSE" | sed '$d')
+          
+          if [ "$HTTP_CODE" = "201" ]; then
+            RELEASE_ID=$(echo "$BODY" | jq -r '.id')
+            echo "release_id=$RELEASE_ID" >> $GITHUB_OUTPUT
+            echo "Created release: $RELEASE_NAME (ID: $RELEASE_ID)"
+          else
+            echo "Failed to create release. HTTP Code: $HTTP_CODE"
+            echo "Response: $BODY"
+            exit 1
+          fi
+
+      - name: Upload APK to Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          RELEASE_ID="${{ steps.create-release.outputs.release_id }}"
+          APK_PATH="build/app/outputs/flutter-apk/app-release.apk"
+          
+          if [ ! -f "$APK_PATH" ]; then
+            echo "Error: APK file not found at $APK_PATH"
+            exit 1
+          fi
+          
+          echo "Uploading $APK_PATH to release ID: $RELEASE_ID"
+          
+          curl -X POST \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github.v3+json" \
+            -H "Content-Type: application/vnd.android.package-archive" \
+            --data-binary "@$APK_PATH" \
+            "https://uploads.github.com/repos/${{ github.repository }}/releases/$RELEASE_ID/assets?name=coachguru-latest.apk"
+          
+          echo "APK uploaded successfully as coachguru-latest.apk"
+
+      - name: Summary
+        run: |
+          echo "## ✅ Release Created Successfully" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Version:** ${{ steps.version.outputs.version }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Tag:** ${{ steps.version.outputs.tag }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Release Name:** CoachGuru v${{ steps.version.outputs.version }}" >> $GITHUB_STEP_SUMMARY
+          echo "**APK:** coachguru-latest.apk" >> $GITHUB_STEP_SUMMARY
+

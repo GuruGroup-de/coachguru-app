@@ -93,6 +93,9 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/coachguru_logo.png
+    - assets/icon/app_icon.png
+    - assets/icon/app_icon.svg
+    - assets/logo/coachguru_logo_circle.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
@@ -122,5 +125,8 @@ flutter:
 
 # Flutter Launcher Icons configuration
 flutter_launcher_icons:
-  android: "launcher_icon"
-  image_path: "assets/icon/coachguru_app_icon.png"
+  android: true
+  ios: true
+  image_path: "assets/icon/app_icon.png"
+  min_sdk_android: 21
+  remove_alpha_ios: true

@@ -1,0 +1,126 @@
+name: Upload Screenshots to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'docs/screenshots/**'
+      - 'screenshots/**'
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["Build and Release APK"]
+    types:
+      - completed
+
+jobs:
+  upload-screenshots:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install ImageMagick
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y imagemagick
+
+      - name: Optimize screenshots
+        run: |
+          mkdir -p docs/screenshots/optimized
+          
+          # Process PNG files
+          if [ -d "docs/screenshots" ] && [ "$(ls -A docs/screenshots/*.png 2>/dev/null)" ]; then
+            for img in docs/screenshots/*.png; do
+              if [ -f "$img" ]; then
+                filename=$(basename "$img")
+                echo "Optimizing: $filename"
+                convert "$img" -strip -resize 1080x1920\> -quality 90 "docs/screenshots/optimized/$filename"
+              fi
+            done
+          fi
+          
+          # Process JPG files (convert to PNG)
+          if [ -d "docs/screenshots" ] && [ "$(ls -A docs/screenshots/*.jpg docs/screenshots/*.jpeg 2>/dev/null)" ]; then
+            for img in docs/screenshots/*.jpg docs/screenshots/*.jpeg; do
+              if [ -f "$img" ]; then
+                filename=$(basename "$img" .jpg | sed 's/\.jpeg$//').png
+                echo "Converting and optimizing: $filename"
+                convert "$img" -strip -resize 1080x1920\> -quality 90 "docs/screenshots/optimized/$filename"
+              fi
+            done
+          fi
+          
+          # Replace original with optimized
+          if [ -d "docs/screenshots/optimized" ] && [ "$(ls -A docs/screenshots/optimized/*.png 2>/dev/null)" ]; then
+            mv docs/screenshots/optimized/*.png docs/screenshots/ 2>/dev/null || true
+            rmdir docs/screenshots/optimized 2>/dev/null || true
+          fi
+
+      - name: Check if GitHub Pages branch exists
+        id: check-pages
+        run: |
+          if git ls-remote --heads origin gh-pages | grep -q gh-pages; then
+            echo "pages_branch=gh-pages" >> $GITHUB_OUTPUT
+            echo "target_dir=screenshots" >> $GITHUB_OUTPUT
+          else
+            echo "pages_branch=main" >> $GITHUB_OUTPUT
+            echo "target_dir=docs/screenshots" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Checkout GitHub Pages branch
+        run: |
+          if [ "${{ steps.check-pages.outputs.pages_branch }}" = "gh-pages" ]; then
+            git checkout -b gh-pages origin/gh-pages 2>/dev/null || git checkout gh-pages
+          else
+            git checkout main
+          fi
+
+      - name: Copy screenshots to Pages directory
+        run: |
+          TARGET_DIR="${{ steps.check-pages.outputs.target_dir }}"
+          mkdir -p "$TARGET_DIR"
+          
+          if [ -d "docs/screenshots" ]; then
+            cp -r docs/screenshots/* "$TARGET_DIR/" 2>/dev/null || true
+            echo "Copied screenshots to $TARGET_DIR"
+          fi
+
+      - name: Archive screenshots for release
+        if: github.event.workflow_run.conclusion == 'success'
+        run: |
+          # Get the latest release tag
+          TAG=$(git describe --tags --abbrev=0 2>/dev/null || git ls-remote --tags origin | grep -o 'refs/tags/v[0-9]*\.[0-9]*\.[0-9]*' | sort -V | tail -1 | sed 's|refs/tags/||' || echo "")
+          
+          if [ -n "$TAG" ] && [ "$TAG" != "" ]; then
+            RELEASE_DIR="docs/releases/$TAG/screenshots"
+            mkdir -p "$RELEASE_DIR"
+            
+            if [ -d "docs/screenshots" ]; then
+              cp -r docs/screenshots/* "$RELEASE_DIR/" 2>/dev/null || true
+              echo "Archived screenshots to $RELEASE_DIR for release $TAG"
+            fi
+          else
+            echo "No release tag found, skipping archive"
+          fi
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          git add docs/screenshots/ docs/releases/ || true
+          git add screenshots/ || true
+          
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "📸 Updated screenshots [skip ci]"
+            git push origin HEAD:${{ steps.check-pages.outputs.pages_branch }}
+          fi
+

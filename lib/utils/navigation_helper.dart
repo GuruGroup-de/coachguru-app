@@ -11,13 +11,13 @@ class NavHelper {
         Navigator.pop(context);
       } else {
         // Fallback: navigate to home if we can't pop
-        Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+        Navigator.pushReplacementNamed(context, '/');
       }
     } catch (e) {
       print('Navigation error in safePop: $e');
       // Last resort: try to navigate to home
       try {
-        Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+        Navigator.pushReplacementNamed(context, '/');
       } catch (e2) {
         print('Failed to navigate to home: $e2');
       }
@@ -40,12 +40,55 @@ class NavHelper {
     }
   }
 
-  /// Safely navigates to a route
-  static Future<void> safePush(BuildContext context, Widget screen) async {
+  /// Safely navigates to a route (route name as String)
+  /// If route is missing, falls back to home route
+  static Future<void> safePush(BuildContext context, String route) async {
     try {
+      if (!context.mounted) return;
+      
+      // Use pushNamed with try/catch
+      await Navigator.pushNamed(context, route);
+    } catch (e) {
+      print('Navigation error in safePush ($route): $e');
+      // Fallback to home route if route is missing
+      try {
+        if (context.mounted) {
+          await Navigator.pushReplacementNamed(context, '/');
+        }
+      } catch (e2) {
+        print('Failed to navigate to home: $e2');
+      }
+    }
+  }
+
+  /// Safely navigates to a screen (Widget)
+  static Future<void> safePushWidget(BuildContext context, Widget screen) async {
+    try {
+      if (!context.mounted) return;
       await Navigator.push(context, MaterialPageRoute(builder: (_) => screen));
     } catch (e) {
-      print('Navigation error in safePush: $e');
+      print('Navigation error in safePushWidget: $e');
+    }
+  }
+
+  /// Safely navigates to a named route
+  /// If route is missing, falls back to HomeScreen
+  static Future<void> safePushNamed(BuildContext context, String routeName) async {
+    try {
+      if (!context.mounted) return;
+      
+      // Try to push the named route
+      await Navigator.pushNamed(context, routeName);
+    } catch (e) {
+      print('Navigation error in safePushNamed ($routeName): $e');
+      // Fallback: try to navigate to home route
+      try {
+        if (context.mounted) {
+          await Navigator.pushReplacementNamed(context, '/');
+        }
+      } catch (e2) {
+        print('Failed to navigate to home: $e2');
+      }
     }
   }
 }
