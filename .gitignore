@@ -154,3 +154,18 @@ pubspec.lock
 
 # Cursor specific
 .cursor/
+
+# Sensitive files (API keys, secrets, credentials)
+google-services.json
+google-services.plist
+*.env
+*.env.local
+*.env.*.local
+**/secrets/
+**/credentials/
+**/api_keys/
+**/*secret*
+**/*password*
+**/*key*
+android/app/google-services.json
+ios/Runner/GoogleService-Info.plist
